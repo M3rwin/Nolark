@@ -47,7 +47,7 @@ function calculer() {
     let paie = primeAnciennete(ancien) + comS20(qS20) + comXs(qXs) + comMult(qMult);
     alert("La rémunération sera de " + paie + "€");
     
-    let paie = primeAnciennete(ancien) + comS20(qS20) + comXs(qXs) + comMult(qMult);
+    paie = primeAnciennete(ancien) + comS20(qS20) + comXs(qXs) + comMult(qMult);
     window.document.querySelector("result").innetHTML = "La rémunération sera de " + paie + "€";
     
 }

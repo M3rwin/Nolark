@@ -38,21 +38,22 @@ function comMult(qteMult) {
     }
 }
 
-
-function calculer(anciennete, qteS20, qteXs, qteMult) {
-    let anciennete = parseInt(window.document.querySelector("i_anciennete").value);
-    let qteS20 = parseInt(window.document.querySelector("i_s20").value);
-    let qteXs = parseInt(window.document.querySelector("i_xspirit").value);
-    let qteMult = parseInt(window.document.querySelector("i_mult").value);
+function calculer() {
+    let ancien = parseInt(window.document.querySelector("i_anciennete").value);
+    let qS20 = parseInt(window.document.querySelector("i_s20").value);
+    let qXs = parseInt(window.document.querySelector("i_xspirit").value);
+    let qMult = parseInt(window.document.querySelector("i_mult").value);
     
-    let paie = primeAnciennete(anciennete) + comS20(qteS20) + comXs(qteXs) + comMult(qteMult);
+    let paie = primeAnciennete(ancien) + comS20(qS20) + comXs(qXs) + comMult(qMult);
+    alert("La rémunération sera de " + paie + "€");
+    
+    let paie = primeAnciennete(ancien) + comS20(qS20) + comXs(qXs) + comMult(qMult);
     window.document.querySelector("result").innetHTML = "La rémunération sera de " + paie + "€";
     
 }
 
 
-
 window.addEventListener("load", function () {
-    window.document.querySelector("#btn_calculer").addEventListener("click", caluler());
+    window.document.querySelector("#bouton").addEventListener("click", calculer());
 });
 

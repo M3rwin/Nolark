@@ -39,17 +39,19 @@ function comMult(qteMult) {
 }
 
 function calculer() {
-    let ancien = parseInt(window.document.querySelector("i_anciennete").value);
-    let qS20 = parseInt(window.document.querySelector("i_s20").value);
-    let qXs = parseInt(window.document.querySelector("i_xspirit").value);
-    let qMult = parseInt(window.document.querySelector("i_mult").value);
-    
-    let paie = primeAnciennete(ancien) + comS20(qS20) + comXs(qXs) + comMult(qMult);
-    alert("La rémunération sera de " + paie + "€");
-    
-    paie = primeAnciennete(ancien) + comS20(qS20) + comXs(qXs) + comMult(qMult);
-    window.document.querySelector("result").innetHTML = "La rémunération sera de " + paie + "€";
-    
+    if (window.document.querySelector("i_anciennete") !== "" && window.document.querySelector("i_s20") !== "" &&
+            window.document.querySelector("i_xspirit") !== "" && window.document.querySelector("i_mult") !== "") {
+        let ancien = parseInt(window.document.querySelector("i_anciennete").value);
+        let qS20 = parseInt(window.document.querySelector("i_s20").value);
+        let qXs = parseInt(window.document.querySelector("i_xspirit").value);
+        let qMult = parseInt(window.document.querySelector("i_mult").value);
+
+        let paie = primeAnciennete(ancien) + comS20(qS20) + comXs(qXs) + comMult(qMult);
+        alert("La rémunération sera de " + paie + "€");
+    } else {
+        alert("Vous devez remplir toute les cases");
+    }
+
 }
 
 

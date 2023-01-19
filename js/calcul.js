@@ -55,7 +55,7 @@ function calculer() {
 }
 
 
-window.addEventListener("load", function () {
-    window.document.querySelector("#bouton").addEventListener("click", calculer());
-});
+document.getElementById('bouton').onclick = calculer();
+
+
 

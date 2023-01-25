@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+
+
 <html lang="fr-FR">
     <head>
         <title>Casques Nolark : Sécurité et confort, nos priorités !</title>
@@ -37,29 +40,35 @@
                 </ul>
             </nav>
         </header>
-        <section id="contact">
-            <h1>Calculez votre rémunération :</h1>
-            <form id="form_contact" name="form_contact" action="http://gil83.fr/nolark/testforms.php" method="POST">
-                <fieldset id="coordo">
-                    <legend>Calculateur</legend>
-                    <div><label for="i_s20">Nombre de "S 20" vendus :</label> <input type="number" name="i_s20" id="i_s20" min="0" required><div class="input-validation"></div></div>
-                    <div><label for="i_multitec">Nombre de "Multitec" vendus :</label> <input type="number" name="i_multitec" id="i_multitec" min="0" required><div class="input-validation"></div></div>
-                    <div><label for="i_xspirit">Nombre de "X-Spirit" vendus :</label> <input type="number" name="i_xspirit" id="i_xspirit" min="0" required><div class="input-validation"></div></div>
-                    
-                    <fieldset id="marques">
-                        <legend>Votre ancienneté :</legend>
-                        <table>
-                            <tr>
-                                <td><input type="radio" name="chk_marques[]" id="ans_0" value="agv"><label for="ans_0">Moins de 5 ans</label></td>
-                                <td><input type="radio" name="chk_marques[]" id="ans_5" value="airoh"><label for="ans_5">Entre 5 et 10 ans</label></td>
-                                <td><input type="radio" name="chk_marques[]" id="ans_10" value="arai"><label for="ans_10">Plus de 10 ans</label></td>
-                            </tr>     
-                        </table>
-                    </fieldset>
+        
+        
+        <section id="formulaire">
+            <h1>Simulateur de calcul pour la force de vente :</h1>
+            <form id="form_simulateur" name="form_simulateur">
+                <fieldset id="resultats">
+                    <legend>Vos résultats : </legend>
+                    <p>
+                        <label for="anciennete">Nombre d'années d'ancienneté :</label>
+                        <input type="number" name="anciennete" id="anciennete" min="0" max="50" value="0">
+                    </p>
+                    <p>
+                        <label for="km">Nombre de kilomètres parcourus :</label>
+                        <input type="number" name="km" id="km" min="0" max="9999" value="0">
+                    </p>
+                    <p>
+                        <label for="accident">Nombre d'accidents :</label>
+                        <input type="number" name="accident" id="accident" min="0" max="9999" value="0">
+                    </p>
                 </fieldset>
-                <div id="controles"><input type="button" id="bouton" name="sub_envoyer" value="Calculer"> <input type="reset" name="rst_annuler" value="Effacer les réponses"></div>
+                <p id="controles">
+                    <input type="button" name="sub_calculer" id="bouton"
+                           value="Calculer votre rémunération">
+                    <input type="reset" name="rst_annuler" id="btn_annuler" value="Effacer les données">
+                </p>
             </form>
         </section>
+        
+        
         <footer>
             <p>&copy;2023 Nolark - Créé par Marco CLIN<p>
         </footer>

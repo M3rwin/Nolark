@@ -1,13 +1,14 @@
-window.addEventListener("load", function () 
+window.addEventListener("load", function ()
 {
     window.document.querySelector("#bouton").addEventListener("click", validEnvoi);
-}
-);
+});
+
+window.addEventListener("load", function () {
+    window.document.querySelector("#btn_annuler").addEventListener("click", reinit);
+});
 
 
-
-
-function getId(id){
+function getId(id) {
     var valeur = window.document.querySelector(id).value;
     return valeur;
 }
@@ -16,10 +17,9 @@ function validEnvoi() {
     if (window.document.querySelector("#km").value === "" || window.document.querySelector("#anciennete").value === "" || (window.document.querySelector("#accident").value === ""))
     {
         alert("Tout les champs doivent être rempli"); // On affiche un message
-    } 
-    else 
+    } else
     {
-        calculer(); 
+        calculer();
     }
 }
 /**
@@ -27,13 +27,12 @@ function validEnvoi() {
  * @param {int} km
  * @returns {float}
  */
-function distance(km){
+function distance(km) {
     const plafond = 900, primeKm = 0.01;
-    var prime=primeKm*km;
-    if (prime>plafond){
+    var prime = primeKm * km;
+    if (prime > plafond) {
         prime = plafond;
-    }
-    else{
+    } else {
         return prime;
     }
 }
@@ -43,42 +42,71 @@ function distance(km){
  * @param {int} anne
  * @returns {float}
  */
-function getAnciennete(anne){
-    const ancienMin=4, primeBase=300, primeSup=30;
-    var prime=0.0;
-    if(anne>=4){
-        prime+=primeBase;
+function getAnciennete(anne) {
+    const ancienMin = 4, primeBase = 300, primeSup = 30;
+    var prime = 0.0;
+    if (anne >= 4) {
+        prime += primeBase;
     }
-    for (i=0; i<anne-4; i++){
-        prime+=primeSup;
+    for (i = 0; i < anne - 4; i++) {
+        prime += primeSup;
     }
     return prime;
 }
 
 
-function penalite(accidents, prime){
-    if(accidents===1){
-        return prime/2;
-    }
-    else if(accidents===2){
-        return prime/3;
-    }
-    else if(accidents===3){
-        return prime/4;
-    }
-    else if(accidents===0){
-        return null;
-    }
-    else{
+function penalite(accidents, prime) {
+    if (accidents === 1) {
+        return prime / 2;
+    } else if (accidents === 2) {
+        return prime / 3;
+    } else if (accidents === 3) {
+        return prime / 4;
+    } else if (accidents === 0) {
+        return prime;
+    } else {
         console.warn("VOUS ÊTES VIRÉ");
+        return 0;
     }
 }
 
+function reinit() {
+    document.getElementById("reponse").remove();
+}
 
-function calculer(){
+
+function calculer() {
     var kmParcouru = parseInt(getId("#km"));
     var nbAccident = parseInt(getId("#accident"));
     var anciennete = parseInt(getId("#anciennete"));
-    var reponse = distance(kmParcouru) + penalite(nbAccident) + getAnciennete(anciennete);
-    alert(reponse);
+    var reponse = distance(kmParcouru) + getAnciennete(anciennete);
+    reponse = penalite(nbAccident, reponse);
+    let emplacement = window.document.createElement('h2');
+    emplacement.id = "reponse";
+    if (reponse === 0) {
+        if (!!document.getElementById("reponse") === false) {
+            emplacement.appendChild(window.document.createTextNode("Vous n'aurez pas de prime."));
+            window.document.querySelector('#formulaire').appendChild(emplacement);
+        } else {
+            document.querySelector('#reponse').innerHTML = "Vous n'aurez pas de prime";
+        }
+    }
+    if (nbAccident !== 0) {
+        if (!!document.getElementById("reponse") === false) {
+            emplacement.appendChild(window.document.createTextNode("Votre prime sera de " + reponse + "€, sans vos accidents vous auriez eu " + (distance(kmParcouru) + getAnciennete(anciennete)) + "€"));
+            window.document.querySelector('#formulaire').appendChild(emplacement);
+        } else {
+            document.querySelector('#reponse').innerHTML = "Votre prime sera de " + reponse + "€, sans vos accidents vous auriez eu " + (distance(kmParcouru) + getAnciennete(anciennete)) + "€";
+        }
+
+    } else {
+        if (!!document.getElementById("reponse") === false) {
+            emplacement.appendChild(window.document.createTextNode("Votre prime sera de " + reponse + "€."));
+            window.document.querySelector('#formulaire').appendChild(emplacement);
+        } else {
+            document.querySelector('#reponse').innerHTML = "Votre prime sera de " + reponse + "€.";
+        }
+
+    }
+
 }

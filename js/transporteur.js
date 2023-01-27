@@ -74,15 +74,33 @@ function reinit() {
     document.getElementById("reponse").remove();
 }
 
-
+/**
+ * Fonction principale de calcul de prime
+ * @returns {undefined}
+ */
 function calculer() {
     var kmParcouru = parseInt(getId("#km"));
     var nbAccident = parseInt(getId("#accident"));
     var anciennete = parseInt(getId("#anciennete"));
     var reponse = distance(kmParcouru) + getAnciennete(anciennete);
+    
+    
     reponse = penalite(nbAccident, reponse);
+    
+    
     let emplacement = window.document.createElement('h2');
     emplacement.id = "reponse";
+    
+    if (nbAccident > 3) {
+        if (!!document.getElementById("reponse") === false) {
+            emplacement.appendChild(window.document.createTextNode("Vous êtes viré noob"));
+            window.document.querySelector('#formulaire').appendChild(emplacement);
+        } else {
+            document.querySelector('#reponse').innerHTML = "Vous êtes viré noob";
+        }
+        return null;
+    }
+    
     if (reponse === 0) {
         if (!!document.getElementById("reponse") === false) {
             emplacement.appendChild(window.document.createTextNode("Vous n'aurez pas de prime."));
@@ -91,6 +109,7 @@ function calculer() {
             document.querySelector('#reponse').innerHTML = "Vous n'aurez pas de prime";
         }
     }
+    
     if (nbAccident !== 0) {
         if (!!document.getElementById("reponse") === false) {
             emplacement.appendChild(window.document.createTextNode("Votre prime sera de " + reponse + "€, sans vos accidents vous auriez eu " + (distance(kmParcouru) + getAnciennete(anciennete)) + "€"));

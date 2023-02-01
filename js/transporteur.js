@@ -32,6 +32,7 @@ function distance(km) {
     var prime = primeKm * km;
     if (prime > plafond) {
         prime = plafond;
+        return prime;
     } else {
         return prime;
     }
